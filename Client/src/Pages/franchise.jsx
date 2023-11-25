@@ -1,37 +1,57 @@
 import { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function Franchise() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState('');
-  const [location, setLocation] = useState('');
+  const [phoneNumber, setPhone] = useState('');
+  const [preferredLocation, setLocation] = useState('');
+  const [success, setSuccess] = useState('');
+  const [error, setError] = useState('');
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log({
+    const data = {
       name: name,
       email: email,
-      phone: phone,
-      location: location,
+      phoneNumber: phoneNumber,
+      preferredLocation: preferredLocation
+    }
+    axios
+    .post("http://localhost:5000/api/franchise", data
+    , {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    .then((response) => {
+      console.log("data entered Successful");
+      setSuccess(response.data.message);
+      setError('');
+    })
+    .catch((error) => {
+        setError(error.response.data.message);
+        setSuccess('');
+        
     });
-   
+
   };
 
   return (
     <Container className="my-5">
-      <h1 className="text-center mb-5">Sell a Franchise</h1>
+      <h1 className="text-center mb-3">Sell a Franchise</h1>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="formName">
-          <Form.Label>Name</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter your name"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            required
-          />
-        </Form.Group>
+      <Form.Group controlId="formName">
+  <Form.Label>Name</Form.Label>
+  <Form.Control
+    type="text"
+    placeholder="Enter your name"
+    value={name}
+    onChange={(event) => setName(event.target.value)}
+  />
+</Form.Group>
+
         <Form.Group controlId="formEmail">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -47,7 +67,7 @@ function Franchise() {
           <Form.Control
             type="tel"
             placeholder="Enter your phone number"
-            value={phone}
+            value={phoneNumber}
             onChange={(event) => setPhone(event.target.value)}
             required
           />
@@ -57,15 +77,20 @@ function Franchise() {
           <Form.Control
             type="text"
             placeholder="Enter preferred location for the franchise"
-            value={location}
+            value={preferredLocation}
             onChange={(event) => setLocation(event.target.value)}
             required
           />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button style={{marginTop: 10}} variant="primary" type="submit">
           Submit
         </Button>
+        {
+      success && <p style={{ color: 'green', fontSize: '16px', marginTop: 10, textAlign: 'center'}}>{success}</p>}
+      {error && <p style={{ color: 'red', fontSize: '16px', marginTop: 10, textAlign: 'center' }}>{error}</p>}
       </Form>
+     
+
     </Container>
   );
 }

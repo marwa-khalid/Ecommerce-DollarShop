@@ -2,3 +2,7 @@
 .navbar-nav a{
     font-size: 18px;
 }
+
+errText{
+    color : rgb(250, 76, 76) !important ;
+}

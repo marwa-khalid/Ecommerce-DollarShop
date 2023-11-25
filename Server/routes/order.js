@@ -1,23 +1,23 @@
 const Order = require("../models/Order");
 const { verifyToken, verifyTokenAuthorization, verifyTokenAndAdmin } = require("./verifyToken");
 
+const express = require("express");
+const router = express.Router();
 
-const router = require("express").Router();
-
-
-//Create
-
-router.post("/" , verifyToken, async (req,res)=>{
-     const newOrder = new Order(req.body);
-
-     try{
-      const savedOrder = await newOrder.save();
-      res.status(200).json(savedOrder);
-     }catch(err){
-        res.status(500).json(err)
-     }
+router.post("/" , async (req,res)=>{
+  console.log("helo")
+  const newOrder = new Order(req.body);
+  console.log("helo1")
+  try{
+    console.log("helo2")
+   const savedOrder = await newOrder.save();
+   console.log("helo3")
+   res.status(200).json(savedOrder);
+  }catch(err){
+     res.status(500).json(err)
+     console.log("helo4")
+  }
 }); 
-
 
 //update
 router.put("/:id", verifyTokenAndAdmin, async (req,res)=>{
@@ -50,14 +50,29 @@ router.delete("/:id", verifyTokenAndAdmin, async (req,res)=>{
 
 //GET user orders
 
-router.get("/find/:userId", verifyTokenAuthorization, async (req, res)=>{
-    try{
-        const orders =  await Order.find({ userId: req.params.userId});
-         res.status(200).json(orders);
-    }catch(err){
-       res.status(500).json(err)  
-    }
+router.get('/', async (req, res) => {
+  try {
+    const userEmail = req.query.email; // Assuming you're passing the email as a query parameter
+
+    const userOrders = await Order.find({ email: userEmail });
+
+    res.json(userOrders);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching orders' });
+  }
 });
+
+router.get('/all', async (req, res) => {
+  try {
+
+    const userOrders = await Order.find();
+
+    res.json(userOrders);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching orders' });
+  }
+});
+
 
 //GET All 
 

@@ -87,3 +87,8 @@
     font-size:13px;
     margin-bottom:0;
   }
+.footer-wrapper {
+  bottom: 0;
+  width: 100%;
+}
+
