@@ -97,7 +97,7 @@ const ConfirmReset = () => {
       verificationCode: otp.join(''),
       password: password,
     };
-    axios.post('http://localhost:5000/api/reset/confirm', data, {
+    axios.post('https://dollarwala-server-production.up.railway.app/api/reset/confirm', data, {
       headers: {
         'Content-Type': 'application/json',
       },

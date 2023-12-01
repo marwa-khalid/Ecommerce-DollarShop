@@ -45,7 +45,7 @@ const Cart = () => {
         sort: false,
         customBodyRender: (value) => (
           <img
-            src={`http://localhost:5000/${value}`}
+            src={`https://dollarwala-server-production.up.railway.app/${value}`}
             alt="Product"
             style={{ width: "50px", height: "50px" }}
           />

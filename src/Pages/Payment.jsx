@@ -9,14 +9,14 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/payments/config").then(async (r) => {
+    fetch("https://dollarwala-server-production.up.railway.app/api/payments/config").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/payments/create-payment-intent", {
+    fetch("https://dollarwala-server-production.up.railway.app/api/payments/create-payment-intent", {
       method: "POST",
       body: JSON.stringify({}),
     }).then(async (result) => {

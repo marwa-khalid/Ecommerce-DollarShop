@@ -58,7 +58,7 @@ if (paymentMethod === "card") {
       paymentMethod: "card",
     };
 
-    axios.post('http://localhost:5000/api/orders', orderData, {
+    axios.post('https://dollarwala-server-production.up.railway.app/api/orders', orderData, {
       headers: {
         'Content-Type': 'application/json',
       },
@@ -113,7 +113,7 @@ else if (paymentMethod === "cash") {
         paymentMethod:"cash"
       };
 
-      axios.post('http://localhost:5000/api/orders', orderData)
+      axios.post('https://dollarwala-server-production.up.railway.app/api/orders', orderData)
       .then(response => {
         setMessage("Order Placed");
         dispatch(clearCart())

@@ -22,7 +22,7 @@ const Products = () => {
 
   const getProducts = async () => {
     setLoading(true);
-    await axios.get("http://localhost:5000/api/products")
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/products")
     .then ((response)=>{
       setData(response.data);                                                  
       setFilter(response.data);                                                
@@ -35,7 +35,7 @@ const Products = () => {
 
   const getCategories = async () => {
     
-    await axios.get("http://localhost:5000/api/categories")
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/categories")
     .then ((response)=>{
       setCategories(response.data);    
     })
@@ -162,7 +162,7 @@ const ProductCard = ({ product }) => {
           onMouseLeave={handleMouseLeave}
         >
           <img
-            src={`http://localhost:5000/${product.image}`}
+            src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
             className={`card-img-top ${isHovered ? "blurred" : ""}`}
             alt={product.title}
             height="150px" width = "70px"

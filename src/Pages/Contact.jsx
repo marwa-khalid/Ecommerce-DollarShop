@@ -17,7 +17,7 @@ function Contact() {
       message: message
     }
     axios
-    .post("http://localhost:5000/api/contact", data
+    .post("https://dollarwala-server-production.up.railway.app/api/contact", data
     , {
       headers: {
         'Content-Type': 'application/json',

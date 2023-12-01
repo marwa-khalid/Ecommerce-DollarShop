@@ -38,7 +38,7 @@ const Login = () => {
     }else setPassError('');
 
     axios
-      .post("http://localhost:5000/api/users/login", data
+      .post("https://dollarwala-server-production.up.railway.app/api/users/login", data
       , {
         headers: {
           'Content-Type': 'application/json',

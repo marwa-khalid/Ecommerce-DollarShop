@@ -21,7 +21,7 @@ const ProductReviews = ({ productId, onReviewSubmit, onClose }) => {
     };
 
     axios
-      .post('http://localhost:5000/api/reviews', reviewData, {
+      .post('https://dollarwala-server-production.up.railway.app/api/reviews', reviewData, {
         headers: {
           'Content-Type': 'application/json',
         },

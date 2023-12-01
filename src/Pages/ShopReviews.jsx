@@ -19,7 +19,7 @@ const ShopReviews = () => {
     const getReviews = async () => {
       try{
       
-        const response = await fetch(`http://localhost:5000/api/ShopReviews`);
+        const response = await fetch(`https://dollarwala-server-production.up.railway.app/api/ShopReviews`);
         const reviewData = await response.json();
         setReviews(reviewData);
         const totalRating = reviewData.reduce((sum, review) => sum + review.rating, 0);
@@ -52,7 +52,7 @@ const ShopReviews = () => {
     };
 
     axios
-      .post('http://localhost:5000/api/ShopReviews', reviewData, {
+      .post('https://dollarwala-server-production.up.railway.app/api/ShopReviews', reviewData, {
         headers: {
           'Content-Type': 'application/json',
         },
