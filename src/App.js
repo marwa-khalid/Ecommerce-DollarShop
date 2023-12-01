@@ -9,7 +9,7 @@ import SingleProduct from "./Pages/ProductDetail";
 import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
-import Franchise from "./Pages/Franchise";
+import Franchise from "./Pages/franchise";
 import ShippingForm from "./Pages/ShippingForm";
 import Payment from "./Pages/Payment";
 import OrderScreen from "./Pages/OrderScreen";
