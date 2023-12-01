@@ -72,7 +72,7 @@ if (paymentMethod === "card") {
       const { error } = stripe.confirmPayment({
         elements,
         confirmParams: {
-          return_url: "http://localhost:3000/cart",
+          return_url: "https://dollarwala-server-production.up.railway.app/cart",
         },
       });
   

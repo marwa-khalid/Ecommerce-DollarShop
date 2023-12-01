@@ -162,7 +162,7 @@ const ProductCard = ({ product }) => {
           onMouseLeave={handleMouseLeave}
         >
           <img
-            src={`http://localhost:5000/${product.image}`}
+            src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
             className={`card-img-top ${isHovered ? "blurred" : ""}`}
             alt={product.title}
             height="150px" width = "70px"
