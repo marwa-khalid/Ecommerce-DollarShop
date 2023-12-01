@@ -83,7 +83,8 @@ const Register = () => {
             console.log("working")
             const token = response.data.token.token;
             const expirationDate = response.data.token.tokenExpiration;
-            navigate(`/Register/Authenticate/${token}/${expirationDate}`)
+            const email = response.data.token.email;
+            navigate(`/Register/Authenticate/${email}/${token}/${expirationDate}`)
             console.log("working")
             
           })

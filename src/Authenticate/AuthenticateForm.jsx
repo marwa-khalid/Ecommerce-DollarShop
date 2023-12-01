@@ -6,7 +6,7 @@ const AuthenticateForm = () => {
   const navigate = useNavigate();
   const [otp, setOtp] = useState(['', '', '', '']);
 
-  const { token, expirationDate } = useParams();
+  const { email,token, expirationDate } = useParams();
 
   const containerStyle = {
     textAlign: 'center',
@@ -63,6 +63,7 @@ const AuthenticateForm = () => {
       verificationCode: otp.join(''),
       token:token,
       expirationDate: expirationDate,
+      email:email
     };
     console.log(data);
 

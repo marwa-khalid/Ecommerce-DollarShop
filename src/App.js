@@ -42,7 +42,7 @@ const App = () => {
         <Route exact path="/EditProfile" element={<EditProfile/>}/>
         <Route exact path="/login/reset/Confirm/:email" element={<ConfirmReset/>}/>
         <Route exact path="/Reviews" element={<ShopReviews/>}/>
-        <Route exact path="/Register/Authenticate/:token/:expirationDate" element={<AutheticateForm/>}/>
+        <Route exact path="/Register/Authenticate/:email/:token/:expirationDate" element={<AutheticateForm/>}/>
       </Routes>   
       <Footer />   
     </>
