@@ -43,7 +43,6 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-admin": "REACT_APP_USER_TYPE=Admin react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
