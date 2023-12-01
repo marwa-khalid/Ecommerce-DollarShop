@@ -5,32 +5,54 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/CartSlice';
-import "./Product.css"; 
+import axios from 'axios';
+import "../css/Product.css"; 
 
-const Product = () => {
+const Products = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);         
   const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [categories, setCategories] = useState([]);
 
-  useEffect(() => {
-    let componentMounted = true;                            
-
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("https://dollarwala-server-production.up.railway.app/api/products");
-      if (componentMounted) {
-        const responseData = await response.json();                             //
-        setData(responseData);                                                  //
-        setFilter(responseData);                                                //
-        setLoading(false);                                                      //
-      }
-
-      return () => {
-        componentMounted = false;                                                //
-      };
-    };
-    getProducts();                                                                //
+  useEffect(() => {                          
+    getProducts();  
+    getCategories();                                                             
   }, []);
+
+  const getProducts = async () => {
+    setLoading(true);
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/products")
+    .then ((response)=>{
+      setData(response.data);                                                  
+      setFilter(response.data);                                                
+      setLoading(false);   
+    })
+    .catch((error)=>{
+      window.alert(error)
+    })                                               
+  }
+
+  const getCategories = async () => {
+    
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/categories")
+    .then ((response)=>{
+      setCategories(response.data);    
+    })
+    .catch((error)=>{
+      window.alert(error)
+    })                          
+  }
+
+  const handleSearch = (value) => {
+    setSearchTerm(value);
+    const updatedList = data.filter(
+      (product) =>
+        product.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setFilter(updatedList);
+  };
+  
 
   const Loading = () => {
     return (
@@ -62,28 +84,24 @@ const Product = () => {
   const ShowProducts = () => {
     return (
       <>
-        <div className="buttons d-flex justify-content-center mb-5 pb-5">
+        <div className="buttons d-flex justify-content-center mt-3 pb-5">
+          
           <button className="btn btn-outline-dark me-2" onClick={() => setFilter(data)}>
             All
           </button>
-          <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("cosmetics")}>
-            Cosmetics
-          </button>
-          <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("toys")}>
-            Toys
-          </button>
-          <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("household")}>
-            Household Items
-          </button>
-          <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("jewelry")}>
-            Jewelry
-          </button>
-          <button className="btn btn-outline-dark me-2" onClick={() => filterProduct("wearables")}>
-            Wearables
-          </button>
+          {categories.map((category) => (
+            <button
+              key={category._id}
+              className="btn btn-outline-dark me-2"
+              onClick={() => filterProduct(category.category)}
+            >
+              {category.category}
+            </button>
+          ))}
         </div>
+       
         <div className="row">
-          {filter.map((product) => (                                                //
+          {filter.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
@@ -93,13 +111,25 @@ const Product = () => {
 
   return (
     <div>
-      <div className="container my-5 py-5">
+      <div className="container py-5">
         <div className="row">
-          <div className="col-12 mb-5">
+          <div className="col-12">
             <h1 className="display-6 fw-bolder text-center">Explore Popular Categories </h1>
             <hr />
           </div>
         </div>
+        <div className="row justify-content-end">
+          <div className="col-md-6 mb-4">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Search by product name"
+              value={searchTerm}
+              onChange={(e) => handleSearch(e.target.value)}
+            />
+          </div>
+        </div>
+        
         <div className="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}                           
         </div>
@@ -132,7 +162,7 @@ const ProductCard = ({ product }) => {
           onMouseLeave={handleMouseLeave}
         >
           <img
-            src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
+            src={`http://localhost:5000/${product.image}`}
             className={`card-img-top ${isHovered ? "blurred" : ""}`}
             alt={product.title}
             height="150px" width = "70px"
@@ -162,4 +192,4 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export default Product;
+export default Products;
