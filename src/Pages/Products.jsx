@@ -38,7 +38,7 @@ const Products = () => {
       const user = JSON.parse(localStorage.getItem('userData'));
       const userId = user.id;
 
-      await axios.post('http://localhost:5000/api/wishlist', { userId, product });
+      await axios.post('https://dollarwala-server-production.up.railway.app/api/wishlist', { userId, product });
       
       // Update the state for the specific product to indicate it's in the wishlist
       setProductWishlistStates(prevStates => ({
@@ -58,7 +58,7 @@ const Products = () => {
       const user = JSON.parse(localStorage.getItem('userData'));
       const userId = user.id;
 
-      const response = await axios.get(`http://localhost:5000/api/wishlist/${userId}`);
+      const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
       const wishlistProducts = response.data;
 
       // Create a map to store the wishlist state for each product
@@ -74,7 +74,7 @@ const Products = () => {
   };
 
   const getProducts = async () => {
-    await axios.get("http://localhost:5000/api/products")
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/products")
     .then ((response)=>{
       setData(response.data);                                                  
       setFilter(response.data); 
@@ -86,7 +86,7 @@ const Products = () => {
 
   const getCategories = async () => {
     
-    await axios.get("http://localhost:5000/api/categories")
+    await axios.get("https://dollarwala-server-production.up.railway.app/api/categories")
     .then ((response)=>{
       setCategories(response.data);    
     })
@@ -161,7 +161,7 @@ const Products = () => {
                     onMouseLeave={handleMouseLeave}
                   >
                     <img
-                      src={`http://localhost:5000/${product.image}`}
+                      src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
                       className={`card-img-top ${isHovered ? "blurred" : ""}`}
                       alt={product.title}
                       height="150px" width="70px"
