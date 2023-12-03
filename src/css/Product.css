@@ -23,7 +23,13 @@
   
   .image-buttons button {
     margin-bottom: 10px;
-    
-    /* Adjust the spacing between buttons */
   }
-  
+
+.heart-red {
+  color: red;
+  background-color: transparent;
+}
+
+.heart-red:hover {
+  background-color: transparent;
+}
