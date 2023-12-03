@@ -86,6 +86,7 @@ const NavBar = () => {
                         </div>
                         <hr />
                         <button onClick={() => {toggleDropdown(); navigate('/EditProfile')}} className="dropdown-item">Edit Profile</button>
+                        <button onClick={() => {toggleDropdown(); navigate('/wishlist')}} className="dropdown-item">My Wishlist</button>
                         <button onClick={() => {toggleDropdown(); navigate('/orders')}} className="dropdown-item">My Orders</button>
                         <button className="dropdown-item" onClick={handleLogout}>Logout</button>
                       </div>

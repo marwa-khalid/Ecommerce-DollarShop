@@ -177,10 +177,10 @@ const Products = () => {
                       {productWishlistStates[product._id] ? ( 
                         
                         <button className="heart-red" onClick={()=>handleAddToWishlist(product)}>
-                          <i class="fa fa-heart" aria-hidden="true"></i>
+                          <i className="fa fa-heart" aria-hidden="true"></i>
                         </button>
                       ): <button className="heart-red" onClick={()=>handleAddToWishlist(product)}>
-                      <i class="fa fa-heart-o" aria-hidden="true"></i>
+                      <i className="fa fa-heart-o" aria-hidden="true"></i>
                     </button> }
                   </div>
                     <h5 className="card-title mb-0">{product.title.substring(0, 20)}...</h5>

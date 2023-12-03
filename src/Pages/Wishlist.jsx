@@ -55,7 +55,7 @@ const Wishlist = () => {
                             />
                             <div align="right">  
                                 <button className="heart-red" onClick={()=>handleRemoveFromWishlist(product._id)}>
-                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                    <i className="fa fa-heart" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div>
