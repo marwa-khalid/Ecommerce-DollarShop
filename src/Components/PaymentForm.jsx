@@ -69,6 +69,7 @@ if (paymentMethod === "card") {
     
       dispatch(clearCart());
       navigate('../../cart');
+      const { error } = stripe.confirmPayment();
   
       if (error.type === "card_error" || error.type === "validation_error") {
         setMessage(error.message);
