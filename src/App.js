@@ -10,6 +10,7 @@ import Contact from "./Pages/Contact";
 import About from "./Pages/About";
 import Cart from "./Pages/Cart";
 import Franchise from "./Pages/franchise";
+import Wishlist from "./Pages/Wishlist";
 import ShippingForm from "./Pages/ShippingForm";
 import Payment from "./Pages/Payment";
 import OrderScreen from "./Pages/OrderScreen";
@@ -28,6 +29,7 @@ const App = () => {
       <Routes>
         <Route exact path="/" element={<Home/>} />
         <Route exact path="/product" element={<Product/>} />
+        <Route exact path="/wishlist" element={<Wishlist/>} />
         <Route exact path="/products/:id" element={<SingleProduct/>} />
         <Route exact path="/login" element={<Login/>} />   
         <Route exact path="/Register" element={<Register/>} />  
