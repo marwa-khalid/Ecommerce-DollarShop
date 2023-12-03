@@ -68,13 +68,7 @@ if (paymentMethod === "card") {
       window.alert("Your order has been placed!");
     
       dispatch(clearCart());
-      // navigate('/');
-      const { error } = stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: "https://main--dollarwalaecommerce.netlify.app//cart",
-        },
-      });
+      navigate('../../cart');
   
       if (error.type === "card_error" || error.type === "validation_error") {
         setMessage(error.message);
