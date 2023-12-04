@@ -10,7 +10,7 @@ const Products = () => {
   const [filter, setFilter] = useState(data);       
   const [searchTerm, setSearchTerm] = useState('');
   const [categories, setCategories] = useState([]);
-  const [isHovered, setIsHovered] = useState(false);  
+  const [hoveredProductId, setHoveredProductId] = useState(null);
   const [productWishlistStates, setProductWishlistStates] = useState({});
 
   const dispatch = useDispatch();
@@ -19,18 +19,18 @@ const Products = () => {
     getProducts();  
     getCategories();   
     checkProductsInWishlist();                                                          
-  }, [data]);
+  }, []);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
+  const handleMouseEnter = (productId) => {
+    setHoveredProductId(productId);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    setHoveredProductId(null);
   };
 
   const handleAddToWishlist = async (product) => {
@@ -156,17 +156,17 @@ const Products = () => {
               <div className="col-sm-3 mb-4">
                 <div className="card h-100 text-center p-4">
                   <div
-                    className={`image-container position-relative ${isHovered ? "hovered" : ""}`}
-                    onMouseEnter={handleMouseEnter}
+                    className={`image-container position-relative ${hoveredProductId === product._id ? "hovered" : ""}`}
+                    onMouseEnter={()=>handleMouseEnter(product._id)}
                     onMouseLeave={handleMouseLeave}
                   >
                     <img
                       src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
-                      className={`card-img-top ${isHovered ? "blurred" : ""}`}
+                      className={`card-img-top ${hoveredProductId === product._id ? "blurred" : ""}`}
                       alt={product.title}
                       height="150px" width="70px"
                     />
-                       {isHovered && (
+                       {hoveredProductId === product._id && (
                       <div className="image-buttons position-absolute">
                         <button className="btn btn-primary me-2"  onClick={ ()=> handleAddToCart(product)} >Add to Cart</button>
                       </div>
