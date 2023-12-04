@@ -14,7 +14,7 @@ import Wishlist from "./Pages/Wishlist";
 import ShippingForm from "./Pages/ShippingForm";
 import Payment from "./Pages/Payment";
 import OrderScreen from "./Pages/OrderScreen";
-import ResetPasswordForm from "./reset/ResetForm";
+import ResetForm from "./reset/ResetForm";
 import AutheticateForm from "./Authenticate/AuthenticateForm";
 import ConfirmReset from "./reset/ConfirmReset";
 import EditProfile from "./Pages/EditProfile";
@@ -31,8 +31,7 @@ const App = () => {
         <Route exact path="/product" element={<Product/>} />
         <Route exact path="/wishlist" element={<Wishlist/>} />
         <Route exact path="/products/:id" element={<SingleProduct/>} />
-        <Route exact path="/login" element={<Login/>} />   
-        <Route exact path="/login/reset" element={<ResetPasswordForm/>} />   
+        <Route exact path="/login" element={<Login/>} />    
         <Route exact path="/Register" element={<Register/>} />  
         <Route exact path="/Cart" element={<Cart/>} />   
         <Route exact path="/Contact" element={<Contact/>} />
@@ -41,7 +40,7 @@ const App = () => {
         <Route exact path="/Franchise" element={<Franchise/>}/>
         <Route exact path="/cart/ShippingForm/Payment/:fullAddress" element={<Payment/>}/>
         <Route exact path="/orders" element={<OrderScreen/>}/>
-        <Route exact path="/login/reset" element={<ResetPasswordForm/>}/>
+        <Route exact path="/login/reset" element={<ResetForm/>}/>
         <Route exact path="/EditProfile" element={<EditProfile/>}/>
         <Route exact path="/login/reset/Confirm/:email" element={<ConfirmReset/>}/>
         <Route exact path="/Reviews" element={<ShopReviews/>}/>
