@@ -129,7 +129,7 @@ const Login = () => {
             </Form.Group>
 
             <Form.Group className="d-flex justify-content-center mt-3">
-              <Link href="/register" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal", fontSize:'12px'}}>Don't have an account? Register now!</Link>
+              <Link to="/register" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal", fontSize:'12px'}}>Don't have an account? Register now!</Link>
             </Form.Group>
 
             {error && <p style={{ marginTop: '20px', color: 'red', fontSize: '16px' }}>{error}</p>}

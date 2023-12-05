@@ -11,9 +11,9 @@ const Footer = () => {
               <div className="col-sm-6 col-md-3 item">
                 <h3>Services</h3>
                 <ul>
-                  <li><a href="/product">Product Browsing</a></li>
-                  <li><a href="/Franchise">Franchising</a></li>
-                  <li><a href="./Contact">24/7 Customer Service</a></li>
+                  <li><Link to="/product">Product Browsing</Link></li>
+                  <li><Link to="/Franchise">Franchising</Link></li>
+                  <li><Link to="./Contact">24/7 Customer Service</Link></li>
                 </ul>
               </div>
               <div className="col-sm-6 col-md-3 item">
