@@ -6,6 +6,7 @@ import { login } from '../redux/UserSlice';
 import { useNavigate } from 'react-router-dom';
 import bg from '../images/login.png';  
 import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Login = () => { 
   
@@ -118,7 +119,7 @@ const Login = () => {
 
         
             <Form.Group className="d-flex justify-content-end mb-3">
-              <a href="/login/reset" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal",fontSize:'13px'}}>Forgot password?</a>
+              <Link to="/login/reset" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal",fontSize:'13px'}}>Forgot password?</Link>
             </Form.Group>
 
             <Form.Group className="text-center" >
@@ -128,7 +129,7 @@ const Login = () => {
             </Form.Group>
 
             <Form.Group className="d-flex justify-content-center mt-3">
-              <a href="/register" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal", fontSize:'12px'}}>Don't have an account? Register now!</a>
+              <Link href="/register" style={{ color: 'black', textDecoration: 'none',fontWeight:"normal", fontSize:'12px'}}>Don't have an account? Register now!</Link>
             </Form.Group>
 
             {error && <p style={{ marginTop: '20px', color: 'red', fontSize: '16px' }}>{error}</p>}

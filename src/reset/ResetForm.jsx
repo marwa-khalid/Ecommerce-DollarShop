@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import './ResetForm.css'; // Import the CSS file for your component
 import { useNavigate } from 'react-router-dom';
-function ResetForm() {
+
+const ResetForm = () => {
   const [email, setEmail] = useState('');
   const [isButtonHovered, setIsButtonHovered] = useState(false);
   const navigate=useNavigate();

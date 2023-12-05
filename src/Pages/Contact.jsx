@@ -2,7 +2,7 @@ import { Form, Button, Container } from 'react-bootstrap';
 import axios from 'axios';
 import { useState } from 'react';
 
-function Contact() {
+const Contact = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [subject, setSubject] = useState('');

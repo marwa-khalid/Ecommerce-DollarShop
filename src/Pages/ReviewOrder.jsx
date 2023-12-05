@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Container, Form, Button } from 'react-bootstrap';
 
-function ReviewOrder() {
+const ReviewOrder = () => {
   const [productId, setProductId] = useState('');
   const [rating, setRating] = useState('');
   const [comment, setComment] = useState('');

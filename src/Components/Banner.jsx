@@ -3,12 +3,12 @@ import { Carousel } from "react-bootstrap";
 import { Canvas } from "@react-three/fiber";
 import { useGLTF, Stage, PresentationControls } from "@react-three/drei";
 
-function Model(props) {
+const Model = (props) =>{
   const { scene } = useGLTF(props.modelPath);
   return <primitive object={scene} {...props} />;
 }
 
-function Banner({ modelPath }) {
+const Banner = ({ modelPath }) => {
   return (
     <div className="row align-items-center p-0">
       <div className="col-6" style={{ backgroundColor: "#898989", padding: "1rem", display: "flex", justifyContent: "center", alignItems: "center", height: "450px" }}>
@@ -30,7 +30,7 @@ function Banner({ modelPath }) {
   );
 }
 
-function BannerCarousel() {
+const BannerCarousel = () =>{
   return (
     <div>
       <Carousel>
