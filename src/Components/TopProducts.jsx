@@ -13,7 +13,7 @@ const TopProducts = () => {
   const fetchTopProducts = async () => {
     try {
       // Fetch all reviews
-      const response = await axios.get('http://localhost:5000/api/reviews');
+      const response = await axios.get('https://dollarwala-server-production.up.railway.app/api/reviews');
       const reviews = response.data;
   
       // Map reviews to calculate average rating and review count for each product
@@ -39,7 +39,7 @@ const TopProducts = () => {
         Array.from(productMap)
           .map(async ([productId, productData]) => {
             // Fetch details for the product
-            const productDetailsResponse = await axios.get(`http://localhost:5000/api/products/${productId}`);
+            const productDetailsResponse = await axios.get(`https://dollarwala-server-production.up.railway.app/api/products/${productId}`);
             return {
               ...productDetailsResponse.data,
               averageRating: productData.totalRating / productData.reviewCount,
@@ -66,7 +66,7 @@ const TopProducts = () => {
         {top3Products && top3Products.map((product) => (
           <Carousel.Item key={product._id}>
               <img
-                src={`http://localhost:5000/${product.image}`}
+                src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
                 alt={product.title}
                 className="img mb-2"
                 height="100px"

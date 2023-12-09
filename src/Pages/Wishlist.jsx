@@ -19,7 +19,7 @@ const Wishlist = () => {
     try {
       if(user!=null){
       const userId = user.id; 
-      const response = await axios.get(`http://localhost:5000/api/wishlist/${userId}`);
+      const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
       setWishlist(response.data);
       }else
       { 
@@ -34,7 +34,7 @@ const Wishlist = () => {
 
   const handleRemoveFromWishlist = (productId)=>{
     if(user!=null){
-      axios.delete(`http://localhost:5000/api/wishlist/${productId}`)
+      axios.delete(`https://dollarwala-server-production.up.railway.app/api/wishlist/${productId}`)
       .then((response)=>{
           getWishlist();
           console.log(response.data.message);
@@ -66,7 +66,7 @@ const Wishlist = () => {
                     <div className="card h-100 text-center p-4">
                         <div className="image-container">
                             <img
-                            src={`http://localhost:5000/${product.image}`}
+                            src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
                             className="card-img-top"
                             alt={product.title}
                             height="150px" width="70px"
