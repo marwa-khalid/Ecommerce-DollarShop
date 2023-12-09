@@ -136,7 +136,6 @@ const Products = () => {
     setFilter(updatedList);
   };
 
-
   return (
     <div>
       <div className="container py-5">
