@@ -67,13 +67,13 @@ const NavBar = () => {
                   <NavLink to="/cart" className="btn mx-2" >
                       <i className="fa fa-lg fa-shopping-cart me-1"></i>
                   </NavLink>
-                    <img className='rounded-circle' src={`http://localhost:5000/${user.image}`}  style={{ width: '40px', height: '40px' }}  alt="" onClick={toggleDropdown}/>
+                    <img className='rounded-circle' src={`https://dollarwala-server-production.up.railway.app/${user.image}`}  style={{ width: '40px', height: '40px' }}  alt="" onClick={toggleDropdown}/>
                     {showDropdown && (
                       <div className="dropdown-menu dropdown-menu-end show">
                         <div className="d-flex flex-column align-items-center">
                           <img
                             className='rounded-circle mb-2'
-                            src={`http://localhost:5000/${user.image}`}
+                            src={`https://dollarwala-server-production.up.railway.app/${user.image}`}
                             style={{ width: '80px', height: '80px' }}
                             alt={user.name}
                           />

@@ -1,4 +1,7 @@
 /* Navbar */
+body{
+    margin:0
+}
 .navbar-nav a{
     font-size: 18px;
 }
