@@ -17,22 +17,19 @@ const WishlistSlice = createSlice({
       const existingIndex = state.wishlistItems.findIndex(     //compare wishlist items, iterate
         (item) => item._id === action.payload._id
       );
-    
+      
       if (existingIndex>=0) {
-    
         state.wishlistItems.splice(existingIndex, 1);
         toast.error("Product removed from wishlist", {
           position: "bottom-left",
         });
-        localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
       } else {
         state.wishlistItems.push({ ...action.payload });   
-        localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
         toast.success("Product added to wishlist", {
           position: "bottom-left",
         });
       }
-      
+      localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
     },
     removeFromWishlist(state, action) {
         const indexToRemove = state.wishlistItems.findIndex(

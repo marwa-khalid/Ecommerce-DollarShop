@@ -14,7 +14,7 @@ const Products = () => {
   const [categories, setCategories] = useState([]);
   const [hoveredProductId, setHoveredProductId] = useState(null);
   const [productWishlistStates, setProductWishlistStates] = useState({});
-
+  
   const dispatch = useDispatch();
 
   useEffect(() => {  
@@ -26,7 +26,8 @@ const Products = () => {
   const fetchWishlistItems = async () => {
     try {
       const storedWishlistItems = JSON.parse(localStorage.getItem('wishlistItems'));
-      checkProductsInWishlist(storedWishlistItems);       
+      await checkProductsInWishlist(storedWishlistItems);      
+      console.log(storedWishlistItems) 
 
     } catch (error) {
       console.error('Error fetching wishlist items:', error);
@@ -61,6 +62,10 @@ const Products = () => {
         console.log('Product added to wishlist successfully!');
       } else {
         dispatch(addToWishlist(product));
+        setProductWishlistStates(prevStates => ({
+          ...prevStates,
+          [product._id]: false,
+        }));
         fetchWishlistItems();
       }
     } catch (error) {
@@ -76,10 +81,11 @@ const Products = () => {
         
         if(storedWishlistItems!=[]){
           storedWishlistItems.map(item => {
-          productWishlistMap[item._id] = true;
-          setProductWishlistStates(productWishlistMap);
-        });
-      }
+            productWishlistMap[item._id] = true;
+            setProductWishlistStates(productWishlistMap);
+          });
+        }
+        console.log(productWishlistMap)
       }
       else{
         const userId = user.id;
@@ -199,7 +205,7 @@ const Products = () => {
                   </div>
                   <div className="card-body">
                     <div align="right">
-                      {productWishlistStates[product._id] ? ( 
+                      {!(productWishlistStates == {}) && productWishlistStates[product._id] ? ( 
                         
                         <button className="heart-red" onClick={()=>handleAddToWishlist(product)}>
                           <i className="fa fa-heart" aria-hidden="true"></i>

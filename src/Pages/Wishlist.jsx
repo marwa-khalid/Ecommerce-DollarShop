@@ -47,7 +47,6 @@ const Wishlist = () => {
       dispatch(removeFromWishlist(productId));
       getWishlist();       
     }
-    getWishlist();
   }
 
   return (
