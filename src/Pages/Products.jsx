@@ -4,7 +4,7 @@ import { useDispatch} from 'react-redux';
 import { addToCart } from '../redux/CartSlice';
 import axios from 'axios';
 import "../css/Product.css"; 
-import { addToWishlist } from "../redux/WishlistSlice";
+import { addToWishlist} from "../redux/WishlistSlice";
 
 const Products = () => {
 
@@ -130,7 +130,6 @@ const Products = () => {
     );
     setFilter(updatedList);
   };
-
 
   const filterProduct = (cat) => {
     const updatedList = data.filter((x) => x.category === cat);

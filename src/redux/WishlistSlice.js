@@ -20,9 +20,11 @@ const WishlistSlice = createSlice({
     
       if (existingIndex >= 0) {
     
-        toast.info("Product already in wishlist", {
+        state.wishlistItems.splice(existingIndex, 1);
+        toast.error("Product removed from wishlist", {
           position: "bottom-left",
         });
+        localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
       } else {
         state.wishlistItems.push({ ...action.payload });   
         localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
