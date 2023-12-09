@@ -14,6 +14,7 @@ const Products = () => {
   const [categories, setCategories] = useState([]);
   const [hoveredProductId, setHoveredProductId] = useState(null);
   const [productWishlistStates, setProductWishlistStates] = useState({});
+  const user = JSON.parse(localStorage.getItem('userData'));
   
   const dispatch = useDispatch();
 
@@ -25,10 +26,16 @@ const Products = () => {
 
   const fetchWishlistItems = async () => {
     try {
-      const storedWishlistItems = JSON.parse(localStorage.getItem('wishlistItems'));
-      await checkProductsInWishlist(storedWishlistItems);      
-      console.log(storedWishlistItems) 
-
+      if(user!=null){
+        const userId = user.id;
+        const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
+        await checkProductsInWishlist(response.data);  
+      }
+      else{
+        const storedWishlistItems = JSON.parse(localStorage.getItem('wishlistItems'));
+        await checkProductsInWishlist(storedWishlistItems);      
+        console.log(storedWishlistItems);
+      }
     } catch (error) {
       console.error('Error fetching wishlist items:', error);
     }
@@ -56,18 +63,17 @@ const Products = () => {
         // Update the state for the specific product to indicate it's in the wishlist
         setProductWishlistStates(prevStates => ({
           ...prevStates,
-          [product._id]: true,
+          [product._id]: false,
         }));
-  
-        console.log('Product added to wishlist successfully!');
       } else {
         dispatch(addToWishlist(product));
         setProductWishlistStates(prevStates => ({
           ...prevStates,
           [product._id]: false,
         }));
-        fetchWishlistItems();
       }
+      
+      fetchWishlistItems();
     } catch (error) {
       console.log(error.response.data.message);
     }
@@ -75,7 +81,6 @@ const Products = () => {
 
   const checkProductsInWishlist = async (storedWishlistItems) => {
     try {
-      const user = JSON.parse(localStorage.getItem('userData'));
       if(user===null){
         const productWishlistMap = {};
         
@@ -85,16 +90,12 @@ const Products = () => {
             setProductWishlistStates(productWishlistMap);
           });
         }
-        console.log(productWishlistMap)
       }
       else{
-        const userId = user.id;
-        const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
-        const wishlistProducts = response.data;
 
         // Create a map to store the wishlist state for each product
         const productWishlistMap = {};
-        wishlistProducts.forEach(item => {
+        storedWishlistItems.forEach(item => {
           productWishlistMap[item.productId] = true;
         });
 
