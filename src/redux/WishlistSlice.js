@@ -19,25 +19,22 @@ const WishlistSlice = createSlice({
       );
     
       if (existingIndex >= 0) {
-        state.wishlistItems[existingIndex] = {
-          ...state.wishlistItems[existingIndex],
-        };
     
-        toast.info("Increased product quantity", {
+        toast.info("Product already in wishlist", {
           position: "bottom-left",
         });
       } else {
-        let tempProductItem = { ...action.payload };             //adding product to wishlist 
-        state.wishlistItems.push(tempProductItem);                // setting initial state 1
+        state.wishlistItems.push({ ...action.payload });   
+        localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
         toast.success("Product added to wishlist", {
           position: "bottom-left",
         });
       }
-      localStorage.setItem("wishlistItems", JSON.stringify(state.wishlistItems));
+      
     },
     removeFromWishlist(state, action) {
         const indexToRemove = state.wishlistItems.findIndex(
-          (wishlistItem) => wishlistItem._id === action.payload._id
+          (wishlistItem) => wishlistItem._id === action.payload
         );
       
         if (indexToRemove !== -1) {
