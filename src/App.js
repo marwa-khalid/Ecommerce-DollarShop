@@ -7,7 +7,7 @@ import Product from "./Pages/Products";
 import { Routes, Route } from "react-router-dom";
 import SingleProduct from "./Pages/ProductDetail";
 import Contact from "./Pages/Contact";
-import About from "./Pages/About";
+import About from "./Components/About";
 import Cart from "./Pages/Cart";
 import Franchise from "./Pages/franchise";
 import Wishlist from "./Pages/Wishlist";
