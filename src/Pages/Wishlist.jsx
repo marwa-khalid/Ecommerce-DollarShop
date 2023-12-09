@@ -2,35 +2,53 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import "../css/Product.css"; 
 import { NavLink } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { removeFromWishlist } from "../redux/WishlistSlice";
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
   const user = JSON.parse(localStorage.getItem("userData"));
-  const userId = user.id; 
+  const dispatch = useDispatch();
+  console.log(user)
 
-  useEffect(() => {                          
+  useEffect(() => { 
     getWishlist();                                                           
   }, []);
 
   const getWishlist = async () => {
     try {
-      const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
+      if(user!=null){
+      const userId = user.id; 
+      const response = await axios.get(`http://localhost:5000/api/wishlist/${userId}`);
       setWishlist(response.data);
+      }else
+      { 
+        const wishlistData = JSON.parse(localStorage.getItem('wishlistItems'));
+        setWishlist(wishlistData);
+        console.log(wishlistData)
+      }
     } catch (error) {
       console.error('Error fetching wishlist:', error);
     }
   };
 
   const handleRemoveFromWishlist = (productId)=>{
-    axios.delete(`https://dollarwala-server-production.up.railway.app/api/wishlist/${productId}`)
-    .then((response)=>{
-        getWishlist();
-        window.alert(response.data.message);
-    })
-    .catch((error)=>{
-        window.alert(error.response.data.message)
-    })
+    if(user!=null){
+      axios.delete(`http://localhost:5000/api/wishlist/${productId}`)
+      .then((response)=>{
+          getWishlist();
+          console.log(response.data.message);
+      })
+      .catch((error)=>{
+          console.log(error.response.data.message)
+      })
     }
+    else{
+      dispatch(removeFromWishlist(productId));
+      getWishlist();       
+    }
+    getWishlist();
+  }
 
   return (
     <div>
@@ -42,13 +60,13 @@ const Wishlist = () => {
           </div>
         </div>
         <div className="row justify-content-center">
-          {wishlist.length > 0 ? (
+          {wishlist && wishlist.length > 0 ? (
             wishlist.map((product) => (
-                <div className="col-sm-3 mb-4">
+                <div key={product._id} className="col-sm-3 mb-4">
                     <div className="card h-100 text-center p-4">
                         <div className="image-container">
                             <img
-                            src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
+                            src={`http://localhost:5000/${product.image}`}
                             className="card-img-top"
                             alt={product.title}
                             height="150px" width="70px"
@@ -62,9 +80,17 @@ const Wishlist = () => {
                         <div className="card-body">
                             <h5 className="card-title mb-0">{product.title.substring(0, 20)}...</h5>
                             <p className="card-text lead fw-bold">Rs {product.price}</p>
-                            <NavLink to={`/products/${product.productId}`} className="btn btn-dark">
+                            {user!=null? (
+                              <NavLink to={`/products/${product.productId}`} className="btn btn-dark">
+                                  View
+                              </NavLink>
+                            ):
+                            (
+                              <NavLink to={`/products/${product._id}`} className="btn btn-dark">
                                 View
-                            </NavLink>
+                              </NavLink>
+                            )
+                          }
                         </div>
                 </div>
             </div>

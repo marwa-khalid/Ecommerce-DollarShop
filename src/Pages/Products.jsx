@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { addToCart } from '../redux/CartSlice';
 import axios from 'axios';
 import "../css/Product.css"; 
+import { addToWishlist } from "../redux/WishlistSlice";
 
 const Products = () => {
+
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);       
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,11 +17,21 @@ const Products = () => {
 
   const dispatch = useDispatch();
 
-  useEffect(() => {                          
-    getProducts();  
-    getCategories();   
-    checkProductsInWishlist();                                                          
+  useEffect(() => {  
+    fetchWishlistItems();
+    getProducts();
+    getCategories();
   }, []);
+
+  const fetchWishlistItems = async () => {
+    try {
+      const storedWishlistItems = JSON.parse(localStorage.getItem('wishlistItems'));
+      checkProductsInWishlist(storedWishlistItems);       
+
+    } catch (error) {
+      console.error('Error fetching wishlist items:', error);
+    }
+  };
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
@@ -36,45 +48,60 @@ const Products = () => {
   const handleAddToWishlist = async (product) => {
     try {
       const user = JSON.parse(localStorage.getItem('userData'));
-      const userId = user.id;
-
-      await axios.post('https://dollarwala-server-production.up.railway.app/api/wishlist', { userId, product });
-      
-      // Update the state for the specific product to indicate it's in the wishlist
-      setProductWishlistStates(prevStates => ({
-        ...prevStates,
-        [product._id]: true,
-      }));
-
-      window.alert('Product added to wishlist successfully!');
+      if (user!=null) {
+        const userId = user.id;
+        await axios.post('http://localhost:5000/api/wishlist', { userId, product });
+  
+        // Update the state for the specific product to indicate it's in the wishlist
+        setProductWishlistStates(prevStates => ({
+          ...prevStates,
+          [product._id]: true,
+        }));
+  
+        console.log('Product added to wishlist successfully!');
+      } else {
+        dispatch(addToWishlist(product));
+        fetchWishlistItems();
+      }
     } catch (error) {
-      window.alert(error.response.data.message);
+      console.log(error.response.data.message);
     }
   };
 
-
-  const checkProductsInWishlist = async () => {
+  const checkProductsInWishlist = async (storedWishlistItems) => {
     try {
       const user = JSON.parse(localStorage.getItem('userData'));
-      const userId = user.id;
+      if(user===null){
+        const productWishlistMap = {};
+        
+        if(storedWishlistItems!=[]){
+          storedWishlistItems.map(item => {
+          productWishlistMap[item._id] = true;
+          setProductWishlistStates(productWishlistMap);
+        });
+      }
+      }
+      else{
+        const userId = user.id;
+        const response = await axios.get(`http://localhost:5000/api/wishlist/${userId}`);
+        const wishlistProducts = response.data;
 
-      const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
-      const wishlistProducts = response.data;
+        // Create a map to store the wishlist state for each product
+        const productWishlistMap = {};
+        wishlistProducts.forEach(item => {
+          productWishlistMap[item.productId] = true;
+        });
 
-      // Create a map to store the wishlist state for each product
-      const productWishlistMap = {};
-      wishlistProducts.forEach(item => {
-        productWishlistMap[item.productId] = true;
-      });
+        setProductWishlistStates(productWishlistMap);
+      }
 
-      setProductWishlistStates(productWishlistMap);
     } catch (error) {
       console.error('Error checking products in wishlist:', error);
     }
   };
 
   const getProducts = async () => {
-    await axios.get("https://dollarwala-server-production.up.railway.app/api/products")
+    await axios.get("http://localhost:5000/api/products")
     .then ((response)=>{
       setData(response.data);                                                  
       setFilter(response.data); 
@@ -86,7 +113,7 @@ const Products = () => {
 
   const getCategories = async () => {
     
-    await axios.get("https://dollarwala-server-production.up.railway.app/api/categories")
+    await axios.get("http://localhost:5000/api/categories")
     .then ((response)=>{
       setCategories(response.data);    
     })
@@ -132,7 +159,7 @@ const Products = () => {
           </div>
         </div>
         
-        <div className="row justify-content-center">
+        <div className="row ">
           
           <div className="buttons d-flex justify-content-center mt-3 pb-5">
           
@@ -150,25 +177,25 @@ const Products = () => {
           ))}
         </div>
        
-        <div className="row">
+        <div className="row p-0">
           {filter.map((product) => (
             
-              <div className="col-sm-3 mb-4">
-                <div className="card h-100 text-center p-4">
+              <div key={product._id} className="col-sm-3 mb-4">
+                <div className="card h-100 text-center p-3">
                   <div
                     className={`image-container position-relative ${hoveredProductId === product._id ? "hovered" : ""}`}
                     onMouseEnter={()=>handleMouseEnter(product._id)}
                     onMouseLeave={handleMouseLeave}
                   >
                     <img
-                      src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
+                      src={`http://localhost:5000/${product.image}`}
                       className={`card-img-top ${hoveredProductId === product._id ? "blurred" : ""}`}
                       alt={product.title}
                       height="150px" width="70px"
                     />
                        {hoveredProductId === product._id && (
                       <div className="image-buttons position-absolute">
-                        <button className="btn btn-primary me-2"  onClick={ ()=> handleAddToCart(product)} >Add to Cart</button>
+                        <button className="btn btn-secondary me-2"  onClick={ ()=> handleAddToCart(product)} >Add to Cart</button>
                       </div>
                     )}
                   </div>
@@ -183,7 +210,7 @@ const Products = () => {
                       <i className="fa fa-heart-o" aria-hidden="true"></i>
                     </button> }
                   </div>
-                    <h5 className="card-title mb-0">{product.title.substring(0, 20)}...</h5>
+                    <h5 className="card-title m-0">{product.title.substring(0, 20)}...</h5>
                     <p className="card-text lead fw-bold">Rs {product.price}</p>
                     <NavLink to={`/products/${product._id}`} className="btn btn-dark">
                       View
