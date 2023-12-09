@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 const NavBar = () => {
   const user = useSelector((state) => state.user.user);
   const [showDropdown, setShowDropdown] = useState(false);
-  console.log("User Data:", user);
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
@@ -53,11 +52,7 @@ const NavBar = () => {
               </li>
 
               <li className="nav-item">
-                <NavLink className="nav-link" to="/about">About</NavLink>
-              </li>
-
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/Reviews">Reviews</NavLink>
+                <NavLink className="nav-link" to="/Reviews">Shop Reviews</NavLink>
               </li>
 
               <li className="nav-item">
@@ -72,13 +67,13 @@ const NavBar = () => {
                   <NavLink to="/cart" className="btn mx-2" >
                       <i className="fa fa-lg fa-shopping-cart me-1"></i>
                   </NavLink>
-                    <img className='rounded-circle' src={`https://dollarwala-server-production.up.railway.app/${user.image}`}  style={{ width: '40px', height: '40px' }}  alt="" onClick={toggleDropdown}/>
+                    <img className='rounded-circle' src={`http://localhost:5000/${user.image}`}  style={{ width: '40px', height: '40px' }}  alt="" onClick={toggleDropdown}/>
                     {showDropdown && (
                       <div className="dropdown-menu dropdown-menu-end show">
                         <div className="d-flex flex-column align-items-center">
                           <img
                             className='rounded-circle mb-2'
-                            src={`https://dollarwala-server-production.up.railway.app/${user.image}`}
+                            src={`http://localhost:5000/${user.image}`}
                             style={{ width: '80px', height: '80px' }}
                             alt={user.name}
                           />
@@ -95,14 +90,17 @@ const NavBar = () => {
               </>
             ) : (
               <>
-                <NavLink to="/cart" className="btn mx-2" >
+                <NavLink to="/wishlist" className="btn ms-2" style={{ color: 'red' }} >
+                    <i className="fa fa-md fa-heart me-1"></i>
+                </NavLink>
+                <NavLink to="/cart" className="btn ms-2" >
                     <i className="fa fa-lg fa-shopping-cart me-1"></i>
                 </NavLink>
-                <NavLink to="/login" className="btn btn-outline-dark ">
+                <NavLink to="/login" className="btn btn-outline-dark ms-2">
                   <i className="fa fa-sign-in me-1"></i>Login
                 </NavLink>
                 <NavLink to="/register" className="btn btn-outline-dark ms-2">
-                  <i className="fa fa-user-plus me-1"></i>Register
+                  <i className="fa fa-user-plus"></i>Register
                 </NavLink>
               </>
             )}
