@@ -18,7 +18,7 @@ const WishlistSlice = createSlice({
         (item) => item._id === action.payload._id
       );
     
-      if (existingIndex >= 0) {
+      if (existingIndex>=0) {
     
         state.wishlistItems.splice(existingIndex, 1);
         toast.error("Product removed from wishlist", {
