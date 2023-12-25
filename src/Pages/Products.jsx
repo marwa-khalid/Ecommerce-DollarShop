@@ -28,7 +28,7 @@ const Products = () => {
     try {
       if(user!=null){
         const userId = user.id;
-        const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/wishlist/${userId}`);
+        const response = await axios.get(`https://dollar-wala-server.vercel.app/api/wishlist/${userId}`);
         await checkProductsInWishlist(response.data);  
       }
       else{
