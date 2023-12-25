@@ -63,7 +63,7 @@ const Register = () => {
       } else setImageError(''); 
       console.log(image)
 
-      axios.post('https://dollarwala-server-production.up.railway.app/api/users/register', {
+      axios.post('https://dollar-wala-server.vercel.app/api/users/register', {
         name,
         image,
         email,
@@ -78,7 +78,7 @@ const Register = () => {
       )
       .then((response) => {
         
-        axios.post(`https://dollarwala-server-production.up.railway.app/api/authenticate`,{email})
+        axios.post(`https://dollar-wala-server.vercel.app/api/authenticate`,{email})
           .then((response)=>{
             console.log("working")
             const token = response.data.token.token;

@@ -19,7 +19,7 @@ const Franchise = () => {
       preferredLocation: preferredLocation
     }
     axios
-    .post("https://dollarwala-server-production.up.railway.app/api/franchise", data
+    .post("https://dollar-wala-server.vercel.app/api/franchise", data
     , {
       headers: {
         'Content-Type': 'application/json',

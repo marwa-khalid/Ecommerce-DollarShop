@@ -22,7 +22,7 @@ const EditProfile = () => {
 
     try {
       // Make a request to get user data based on user ID
-      const response = await axios.get(`https://dollarwala-server-production.up.railway.app/api/users/${user.id}`);
+      const response = await axios.get(`https://dollar-wala-server.vercel.app/api/users/${user.id}`);
 
       // Update the state with the fetched user data
       setEditedUser({
@@ -33,7 +33,7 @@ const EditProfile = () => {
         image: response.data.image || '',
       });
 
-      setImagePreview(`https://dollarwala-server-production.up.railway.app/${response.data.image}`);
+      setImagePreview(`https://dollar-wala-server.vercel.app/${response.data.image}`);
 
       console.log(user.id)
     } catch (error) {
@@ -72,7 +72,7 @@ const EditProfile = () => {
     try {
         console.log(editedUser)
       // Send a request to update the user's profile
-      await axios.put('https://dollarwala-server-production.up.railway.app/api/users/edit', editedUser, {
+      await axios.put('https://dollar-wala-server.vercel.app/api/users/edit', editedUser, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

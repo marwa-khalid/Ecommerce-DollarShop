@@ -9,14 +9,14 @@ const Payment = () => {
   const [clientSecret, setClientSecret] = useState("");
 
   useEffect(() => {
-    fetch("https://dollarwala-server-production.up.railway.app/api/payments/config").then(async (r) => {
+    fetch("https://dollar-wala-server.vercel.app/api/payments/config").then(async (r) => {
       const { publishableKey } = await r.json();
       setStripePromise(loadStripe(publishableKey));
     });
   }, []);
 
   useEffect(() => {
-    fetch("https://dollarwala-server-production.up.railway.app/api/payments/create-payment-intent", {
+    fetch("https://dollar-wala-server.vercel.app/api/payments/create-payment-intent", {
       method: "POST",
       body: JSON.stringify({}),
     }).then(async (result) => {

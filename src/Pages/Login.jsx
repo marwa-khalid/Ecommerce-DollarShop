@@ -39,7 +39,7 @@ const Login = () => {
     }else setPassError('');
 
     axios
-      .post("https://dollarwala-server-production.up.railway.app/api/users/login", data
+      .post("https://dollar-wala-server.vercel.app/api/users/login", data
       , {
         headers: {
           'Content-Type': 'application/json',

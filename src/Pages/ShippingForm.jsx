@@ -151,7 +151,7 @@ const ShippingForm = () => {
           <td className="px-2">{index + 1}.</td>
           <td className="px-2 position-relative">
             <img
-              src={`https://dollarwala-server-production.up.railway.app/${item.image}`}
+              src={`https://dollar-wala-server.vercel.app/${item.image}`}
               alt="Product"
               style={{ width: "50px", height: "50px" }}
             />

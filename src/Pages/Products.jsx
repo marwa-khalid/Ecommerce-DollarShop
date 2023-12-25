@@ -58,7 +58,7 @@ const Products = () => {
       const user = JSON.parse(localStorage.getItem('userData'));
       if (user!=null) {
         const userId = user.id;
-        await axios.post('https://dollarwala-server-production.up.railway.app/api/wishlist', { userId, product });
+        await axios.post('https://dollar-wala-server.vercel.app/api/wishlist', { userId, product });
   
         // Update the state for the specific product to indicate it's in the wishlist
         setProductWishlistStates(prevStates => ({
@@ -108,7 +108,7 @@ const Products = () => {
   };
 
   const getProducts = async () => {
-    await axios.get("https://dollarwala-server-production.up.railway.app/api/products")
+    await axios.get("https://dollar-wala-server.vercel.app/api/products")
     .then ((response)=>{
       setData(response.data);                                                  
       setFilter(response.data); 
@@ -120,7 +120,7 @@ const Products = () => {
 
   const getCategories = async () => {
     
-    await axios.get("https://dollarwala-server-production.up.railway.app/api/categories")
+    await axios.get("https://dollar-wala-server.vercel.app/api/categories")
     .then ((response)=>{
       setCategories(response.data);    
     })
@@ -193,7 +193,7 @@ const Products = () => {
                     onMouseLeave={handleMouseLeave}
                   >
                     <img
-                      src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
+                      src={`https://dollar-wala-server.vercel.app/${product.image}`}
                       className={`card-img-top ${hoveredProductId === product._id ? "blurred" : ""}`}
                       alt={product.title}
                       height="150px" width="70px"

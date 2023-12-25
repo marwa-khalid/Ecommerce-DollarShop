@@ -14,7 +14,7 @@ const ResetForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    axios.post('https://dollarwala-server-production.up.railway.app/api/reset', {email},{
+    axios.post('https://dollar-wala-server.vercel.app/api/reset', {email},{
         headers: {
           'Content-Type': 'application/json',
         },

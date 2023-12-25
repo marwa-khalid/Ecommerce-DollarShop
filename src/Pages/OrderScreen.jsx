@@ -21,7 +21,7 @@ const OrderScreen = () => {
 
   const fetchOrders = () => {
     if(email){
-    axios.get(`https://dollarwala-server-production.up.railway.app/api/orders?email=${email}`)
+    axios.get(`https://dollar-wala-server.vercel.app/api/orders?email=${email}`)
       .then(response => {
         setOrders(response.data);
         
@@ -58,7 +58,7 @@ const OrderScreen = () => {
 
   const handleOrderStatus = (status) => {
     const orderId = selectedOrderId;
-    axios.put(`https://dollarwala-server-production.up.railway.app/api/orders/${orderId}`, { status }, {
+    axios.put(`https://dollar-wala-server.vercel.app/api/orders/${orderId}`, { status }, {
       headers: {
         'Content-Type': 'application/json', 
       },
@@ -113,7 +113,7 @@ const OrderScreen = () => {
                 <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                   <div style={{ position: 'relative' }}>
                     <img
-                      src={`https://dollarwala-server-production.up.railway.app/${product.image}`}
+                      src={`https://dollar-wala-server.vercel.app/${product.image}`}
                       alt={product.title}
                       style={{ width: "40px", height: "40px" }}
                     />

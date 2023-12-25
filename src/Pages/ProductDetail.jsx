@@ -32,7 +32,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const getProduct = async () => {
       setLoading(true);
-      const response = await fetch(`https://dollarwala-server-production.up.railway.app/api/products/${id}`);
+      const response = await fetch(`https://dollar-wala-server.vercel.app/api/products/${id}`);
       setProduct(await response.json());
       setLoading(false);
     };
@@ -40,7 +40,7 @@ const ProductDetail = () => {
 
     const getReviews = async () => {
       
-      const response = await fetch(`https://dollarwala-server-production.up.railway.app/api/reviews/${id}`);
+      const response = await fetch(`https://dollar-wala-server.vercel.app/api/reviews/${id}`);
       const reviewData = await response.json();
       setReviews(reviewData);
       if (reviewData.length > 0) {
@@ -80,7 +80,7 @@ const ProductDetail = () => {
     <>
       <div className="col-md-6">
       <img
-        src={`https://dollarwala-server-production.up.railway.app/${product?.image}`}
+        src={`https://dollar-wala-server.vercel.app/${product?.image}`}
         alt={product?.title}
         height="400px"
         width="400px"

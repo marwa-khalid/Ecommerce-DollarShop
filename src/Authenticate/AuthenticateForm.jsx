@@ -67,7 +67,7 @@ const AuthenticateForm = () => {
     };
     console.log(data);
 
-    axios.post('https://dollarwala-server-production.up.railway.app/api/authenticate/confirm', data, {
+    axios.post('https://dollar-wala-server.vercel.app/api/authenticate/confirm', data, {
         headers: {
           'Content-Type': 'application/json',
         },

@@ -17,7 +17,7 @@ const Contact = () => {
       message: message
     }
     axios
-    .post("https://dollarwala-server-production.up.railway.app/api/contact", data
+    .post("https://dollar-wala-server.vercel.app/api/contact", data
     , {
       headers: {
         'Content-Type': 'application/json',
